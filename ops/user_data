@@ -1,0 +1,19 @@
+#cloud-config
+users:
+  - name: op
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+packages:
+  - curl
+  - python
+output : { all : '| tee -a /var/log/cloud-init-output.log' }
+runcmd:
+  - mkdir -p /home/op/.ssh
+  - curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key > /home/op/.ssh/authorized_keys
+  - chmod 400 /home/op/.ssh/authorized_keys
+  - chown -R op:op /home/op/.ssh
+  - wget https://gist.githubusercontent.com/kiasaki/fd7ca7b54333e292aaace316f9973ec7/raw/provision.sh
+  - chmod +x provision.sh
+  - ./provision.sh
+

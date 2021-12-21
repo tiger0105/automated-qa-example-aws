@@ -1,0 +1,11 @@
+node_modules
+ops/.terraform
+ops/key
+ops/key.pub
+ops/automated-qa
+ops/lambda_source
+ops/terraform.tfplan
+ops/terraform.tfstate
+ops/terraform.tfstate.backup
+ops/terraform.tfvars
+ops/test-api-checklist.zip
